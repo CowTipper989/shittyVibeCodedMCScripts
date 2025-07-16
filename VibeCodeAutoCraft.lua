@@ -1,6 +1,6 @@
 -- Set peripheral sides
-local inputChest = peripheral.wrap("left")
-local outputChest = peripheral.wrap("right")
+local inputChest = peripheral.wrap("right")
+local outputChest = peripheral.wrap("top")
 
 -- Load recipes from file
 local function loadRecipes(filename)
@@ -70,6 +70,7 @@ local function moveItemsInOrder(input, output, recipe)
         for slot, item in pairs(inputList) do
             if item.name == itemName then
                 input.pushItems(peripheral.getName(output), slot, 1)
+                sleep (1)
                 inputList = input.list() -- refresh after moving
                 found = true
                 break
