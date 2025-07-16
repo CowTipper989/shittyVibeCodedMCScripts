@@ -1,7 +1,7 @@
 -- Set peripheral sides
 local inputChest = peripheral.wrap("right")
-local outputChest = peripheral.wrap("top")
-local rejectChest = peripheral.wrap("back")  -- third chest for unmatched items
+local outputChest = peripheral.wrap("left")
+local rejectChest = peripheral.wrap("top")  -- third chest for unmatched items
 
 -- Load recipes from file
 local function loadRecipes(filename)
@@ -70,8 +70,9 @@ local function moveItemsInOrder(input, output, recipe)
         local found = false
         for slot, item in pairs(inputList) do
             if item.name == itemName then
+                sleep (.5)
                 input.pushItems(peripheral.getName(output), slot, 1)
-                sleep (1)
+                -- sleep (1)
                 inputList = input.list() -- refresh after moving
                 found = true
                 break
