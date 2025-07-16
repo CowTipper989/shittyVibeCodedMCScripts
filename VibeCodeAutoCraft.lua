@@ -4,9 +4,13 @@ local outputChest = peripheral.wrap("right")
 
 -- Load recipes from file
 local function loadRecipes(filename)
+    if not fs.exists(filename) then
+        error("Recipe file does not exist: " .. filename)
+    end
+
     local file = fs.open(filename, "r")
     if not file then
-        error("Could not open recipe file: " .. filename)
+        error("Could not open file: " .. filename .. " (check file permissions or mode)")
     end
 
     local recipes = {}
@@ -21,12 +25,15 @@ local function loadRecipes(filename)
 
         if #recipe == 9 then
             table.insert(recipes, recipe)
+        else
+            print("Warning: Skipped malformed recipe line.")
         end
     end
 
     file.close()
     return recipes
 end
+
 
 -- Get inventory map { [item_name] = count }
 local function getInventoryMap(inv)
