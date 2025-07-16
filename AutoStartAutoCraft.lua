@@ -70,7 +70,7 @@ local function moveItemsInOrder(input, output, recipe)
         local found = false
         for slot, item in pairs(inputList) do
             if item.name == itemName then
-                sleep (.5)
+                sleep (1)
                 input.pushItems(peripheral.getName(output), slot, 1)
                 -- sleep (1)
                 inputList = input.list() -- refresh after moving
@@ -111,6 +111,7 @@ while true do
     end
 
     if hasItems then
+        sleep (1)
         local matched = false
         for _, recipe in ipairs(recipes) do
             if canCraft(invMap, recipe) then
